@@ -12,8 +12,10 @@ from pyspark.sql.functions import to_date, to_timestamp, col, concat, split
 def conf_spark():
     """
     Function sets basic configuration of spark object and relatives
-    :return: spark, schema
+    :return: spark
     """
+
+    # Windows-specific
     os.environ["PYSPARK_PYTHON"] = sys.executable
     os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
 
@@ -28,6 +30,16 @@ def conf_spark():
 
     spark.sql("set spark.sql.legacy.timeParserPolicy=LEGACY")
 
+    return spark
+
+
+def read_jsonl(spark, file_name: str):
+    """
+    Functions reads jsonl file, and organize it in ready to calc median view
+    :param spark: spark
+    :param file_name: target file, ex. "data.jsonl"
+    :return: df
+    """
     schema = StructType(
         [
             StructField("date", StringType()),
@@ -36,17 +48,7 @@ def conf_spark():
             StructField("value", DoubleType()),
         ]
     )
-    return spark, schema
 
-
-def read_jsonl(spark, schema, file_name: str):
-    """
-    Functions reads jsonl file, and organize it in ready to calc median view
-    :param spark: spark
-    :param schema: schema
-    :param file_name: target file, ex. "data.jsonl"
-    :return: df
-    """
     df = spark.read.json(file_name, schema)
     df = (
         df.withColumn(

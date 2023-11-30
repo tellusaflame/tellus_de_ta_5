@@ -1,6 +1,6 @@
 from models.spark_df import conf_spark, calc_median
 
-spark, schema = conf_spark()
+spark = conf_spark()
 
 
 def are_dfs_equal(df1, df2):
