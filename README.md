@@ -21,12 +21,15 @@ For reporting, we would like you to write a small command line tool to aggregate
 Перед запуском приложения необходимо установить требуемые зависимости:
 
 ```console
-python3 -m venv venv
+python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 ```
-
-Результат выполнения скрипта:
+Запуск скрипта (в предварительно активированном venv):
+```console
+python main.py
+```
+Результат выполнения (.json):
 ```json lines
 {"date":"2019-01-01","input":"sensor_1","median_value":-1.5093470081582478}
 {"date":"2019-01-01","input":"sensor_2","median_value":49.27594380832702}
