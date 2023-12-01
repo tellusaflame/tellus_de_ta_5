@@ -105,12 +105,12 @@ pytest tests.py
 Результат выполнения тестов:
 ```console
 (venv) PS F:\_UserFolders\PycharmProjects\tellus_de_ta_5> pytest tests.py
-=================================== test session starts ==================================+
+==================================== test session starts ==================================+
 platform win32 -- Python 3.9.18, pytest-7.4.3, pluggy-1.3.0
 rootdir: F:\_UserFolders\PycharmProjects\tellus_de_ta_5
 collected 1 item                                                                                                                                                                                                                                                                                                       
 
 tests.py .                                                                                                                                                  [100%]
 
-=================================== 1 passed in 20.95s ===================================+
+==================================== 1 passed in 20.95s ===================================+
 ```
