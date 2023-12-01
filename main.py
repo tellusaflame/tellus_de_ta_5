@@ -6,7 +6,7 @@ from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.functions import to_date, col, split
 
 
-def conf_spark() -> SparkSession:
+def build_spark_session() -> SparkSession:
     """
     Function sets basic configuration of spark object and relatives
     """
@@ -33,16 +33,15 @@ def calc_median(df: DataFrame) -> DataFrame:
     """
     Function calcs median value for supplied df grouped by day and input sensors
     """
-    df = (
+    return (
         df.groupby("date", "input")
         .agg(f.median("value").alias("median_value"))
         .sort("date", split(df.input, "_").getItem(1).cast("integer"))
     )
-    return df
 
 
 def main():
-    spark = conf_spark()
+    spark = build_spark_session()
 
     df = spark.read.json("data.jsonl")
 
@@ -50,7 +49,7 @@ def main():
 
     df_median = calc_median(df)
 
-    (df_median.write.mode("overwrite").json("result"))
+    df_median.write.mode("overwrite").json("result")
 
 
 if __name__ == "__main__":

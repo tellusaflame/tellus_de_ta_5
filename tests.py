@@ -1,6 +1,6 @@
-from main import conf_spark, calc_median
+from main import build_spark_session, calc_median
 
-spark = conf_spark()
+spark = build_spark_session()
 
 
 def are_dfs_equal(df1, df2):
